@@ -1,0 +1,40 @@
+<h2>Welcome to the Blackjack Game</h2>
+
+
+<p><%= "Welcome, #{session[:username]}" %></p>
+
+
+<p>Dealer's cards:
+<ul>	
+<% session[:dealer_hand].each_with_index do |card,i| %>
+	<% if i==0 && @dealer_hide%>
+		<li>Card is hidden</li>
+	<% else %>
+		<li><%= "#{display_card(card)}"%></li>
+	<% end %>
+<% end %>
+</ul>
+<% if !@dealer_hide %>
+	<%= "Hand value: #{hand_value(session[:dealer_hand])} " %>
+<% end %>
+</p>
+
+<p><%= "#{session[:username]}'s cards:" %>
+<ul>	
+<% session[:player_hand].each do |card| %>
+	<li><%= "#{display_card(card)}"%></li>
+<% end %>
+</ul>
+<%= "Hand value: #{hand_value(session[:player_hand])} " %>
+</p>
+
+<p>
+<% if @show_buttons %>
+	<form action='/playerhit' method ='post'>
+		<input type='Submit' value ='Hit' class='btn' btn-large/>
+	</form>
+	<form action='/playerstay' method ='post'>
+		<input type='Submit' value ='Stay' class='btn' btn-large/>
+	</form>
+<% end %>
+</p>

@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My First App</title>
+    <title>SKS Casino - Blackjack</title>
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/application.css">
   </head>
   <body style="padding-top: 50px;">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
+            <a class="brand" href="#">Blackjack Game</a>
             <ul class="nav">
-              <li><a href="/">New Game</a></li>
+              <li><a href="/start_new_game">New Game</a></li>
+            </ul>
+            <ul class="nav">
+              <li><a href="/bet">Deal Again</a></li>
             </ul>
         </div>
       </div>
     </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <%if @error %>
       <div class="alert alert-error"><%=@error%></div>
     <% end %>

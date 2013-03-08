@@ -1,40 +1,51 @@
-<h2>Welcome to the Blackjack Game</h2>
+<div class="row-fluid">
 
+	<div class="span3">
+	</div>	
 
-<p><%= "Welcome, #{session[:username]}" %></p>
+	<div class="span9">
+	<p><%= "Cards in deck: #{session[:deck].size}" %>	
 
-
-<p>Dealer's cards:
-<ul>	
-<% session[:dealer_hand].each_with_index do |card,i| %>
-	<% if i==0 && @dealer_hide%>
-		<li>Card is hidden</li>
-	<% else %>
-		<li><%= "#{display_card(card)}"%></li>
+	<div class="well">
+	<h5>Dealer's cards:</h5>
+	<% session[:dealer_hand].each_with_index do |card,i| %>
+		<% if i==0 && @dealer_hide%>
+			<img src='/images/cards/cover.jpg' class='card_image'>
+		<% else %>
+			<%= get_card_url(card)%>
+		<% end %>
 	<% end %>
-<% end %>
-</ul>
-<% if !@dealer_hide %>
-	<%= "Hand value: #{hand_value(session[:dealer_hand])} " %>
-<% end %>
-</p>
+	<br>
+	<% if !@dealer_hide %>
+		<%= "Hand value: #{hand_value(session[:dealer_hand])} " %>
+	<% end %>
+	<% if @show_dealer_hit_btn %>
+		<form action='/dealerhit' method ='post'>
+			<input type='Submit' value ="Show Dealer's next card" class='btn btn-primary' btn-large/>
+		</form>
+	<% end %>
+	</div>	
 
-<p><%= "#{session[:username]}'s cards:" %>
-<ul>	
-<% session[:player_hand].each do |card| %>
-	<li><%= "#{display_card(card)}"%></li>
-<% end %>
-</ul>
-<%= "Hand value: #{hand_value(session[:player_hand])} " %>
-</p>
+	<div class='well'>
+	<h5><%= "#{session[:username]}'s cards:" %></h5>
+	<% session[:player_hand].each do |card| %>
+		<%= get_card_url(card)%>
+	<% end %>
+	<br>
+	<%= "Hand value: #{hand_value(session[:player_hand])} " %>
+	</div>	
 
-<p>
-<% if @show_buttons %>
-	<form action='/playerhit' method ='post'>
-		<input type='Submit' value ='Hit' class='btn' btn-large/>
-	</form>
-	<form action='/playerstay' method ='post'>
-		<input type='Submit' value ='Stay' class='btn' btn-large/>
-	</form>
-<% end %>
-</p>
+	<p>
+	<% if @show_hit_stay_btn %>
+		<%= "#{get_user} has #{display_player_money}. Your current bet is #{display_bet}. What would you like to do?" %>
+		<form id='hit_btn' action='/playerhit' method ='post'>
+			<input type='Submit' value ='Hit' class='btn btn-success' btn-large/>
+		</form>
+		<form id='stay_btn' action='/playerstay' method ='post'>
+			<input type='Submit' value ='Stay' class='btn btn-warning' btn-large/>
+		</form>
+	<% end %>
+	</p>
+	</div>
+
+</div>

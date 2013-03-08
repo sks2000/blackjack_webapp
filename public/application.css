@@ -1,0 +1,14 @@
+form#hit_btn {
+	float: left;
+	margin-right: 10px;
+}
+
+form#stay_btn {
+	float: left;
+}
+
+img.card_image {
+	height: 147px;
+	width: 100px;
+	margin: 0px 5px 5px 0px;
+}
